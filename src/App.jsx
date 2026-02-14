@@ -104,10 +104,33 @@ return (
     >
       <div className={`flex flex-col h-full w-full text-center ${isFocused ? 'justify-start pt-10' : 'justify-center'}`}>
         <h2 className={`font-serif text-pink-600 transition-all ${isFocused ? 'text-3xl md:text-4xl mb-6' : 'text-lg'}`}>
-          Give me the chance na kase
+          Happy Valentine's Day!
         </h2>
         <p className={`text-gray-600 leading-relaxed transition-all ${isFocused ? 'text-lg md:text-xl' : 'text-[10px]'}`}>
-          pleaseeeeeeeeeee, loloves naman kita mwaaaa
+          I wanted to take a moment today to tell you how much I truly appreciate 
+        having you in my life. Sometimes the busiest days make us forget to 
+        stop and say the things that matter most, but please know that your 
+        presence is a constant source of light for me.
+        </p>
+
+        <p className={`text-gray-600 leading-relaxed transition-all ${isFocused ? 'text-lg md:text-xl' : 'text-[10px]'}`}>
+          There is a specific kind of comfort I find in our conversations and 
+        the simple moments we share. You have this effortless way of making 
+        everything feel a little brighter and a lot more meaningful, just by 
+        being exactly who you are.
+        </p>
+
+        <p className={`text-gray-600 leading-relaxed transition-all ${isFocused ? 'text-lg md:text-xl' : 'text-[10px]'}`}>
+          I hope your day today is filled with all the things that make you 
+        smile—the big gestures and the small, quiet joys alike. You deserve 
+        to feel as celebrated and cared for as you make the people around 
+        you feel every single day.
+        </p>
+
+        <p className={`text-gray-600 leading-relaxed transition-all ${isFocused ? 'text-lg md:text-xl' : 'text-[10px]'}`}>
+          Thank you for being such a wonderful part of my world. Whether 
+        today is about grand celebrations or just a quiet evening, I’m 
+        just glad I get to spend it knowing you.
         </p>
         
         {isFocused && (
