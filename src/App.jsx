@@ -23,7 +23,7 @@ return (
 
     {/* 2. THE ENVELOPE WRAPPER (Now just the housing) */}
     <div 
-      className="relative w-80 h-52 bg-pink-200 cursor-pointer shadow-2xl"
+      className="relative w-80 h-52 bg-pink-200 cursor-pointer shadow-2xl overflow-hidden"
       onClick={() => { if (!isFocused) setIsOpen(!isOpen); }}
       style={{ perspective: "1000px" }}
     >
@@ -35,7 +35,7 @@ return (
 
       {/* Top Flap */}
       <motion.div
-        animate={{
+        animate={{    
           rotateX: isOpen ? 170 : 0,
           filter: isOpen ? "brightness(0.8)" : "brightness(1)",
           zIndex: isOpen ? 0 : 30
@@ -54,20 +54,32 @@ return (
 
     {/* 3. THE LETTER (Siblings with the Envelope, not a child) */}
     <motion.div
-       layoutId="letter"
-      transition={{ type: "spring", stiffness: 120, damping: 18 }}
-      animate={{ y: isOpen && !isFocused ? -110 : 0 }}
+      layoutId="letter"
+      transition={{ 
+        type: "spring", 
+        stiffness: 120, 
+        damping: 18,
+        delay: isOpen && !isFocused ? 0.15 : 0 // Small delay so flap opens first
+      }}
+      animate={isFocused ? {
+        y: 0,
+        zIndex: 50,
+      } : {
+        // Increase the 'tuck' from 20 to 40 so it's fully hidden by the V-shape
+        y: isOpen ? -110 : 40, 
+        // Ensure it is lower than the Front Pocket (z-20) when not focused
+        zIndex: isOpen ? 25 : 5, 
+      }}
       onClick={(e) => {
         e.stopPropagation();
         if (isOpen) setIsFocused(true);
       }}
       className={`
-      bg-white shadow-2xl cursor-pointer overflow-hidden
-      ${isFocused 
-        ? 'fixed inset-6 md:inset-20 z-50 p-10 rounded-2xl' 
-        : 'absolute left-1/2 -translate-x-1/2 w-72 h-44 z-10 p-4 rounded-md'}
-    `}
-
+        bg-white shadow-2xl cursor-pointer overflow-hidden
+        ${isFocused 
+          ? 'fixed inset-6 md:inset-20 p-10 rounded-2xl' 
+          : 'absolute left-1/2 -translate-x-1/2 w-72 h-44 p-4 rounded-md'}
+      `}
     >
       <div className={`flex flex-col h-full w-full text-center ${isFocused ? 'justify-start pt-10' : 'justify-center'}`}>
         <h2 className={`font-serif text-pink-600 transition-all ${isFocused ? 'text-3xl md:text-4xl mb-6' : 'text-lg'}`}>
