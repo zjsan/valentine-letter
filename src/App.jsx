@@ -1,11 +1,28 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import useSound from 'use-sound';
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
+  const [playOpen] = useSound('/sounds/Page turn sound effect.mp3', { volume: 0.5 });
+  const [playPop] = useSound('/sounds/BUBBLE POP SOUND EFFECT - FREE.mp3', { volume: 0.4 });
 
+  const toggleEnvelope = () => {
+  if (!isFocused) {
+    playOpen(); // Trigger paper sound
+    setIsOpen(!isOpen);
+  }
+  };
+
+  const handleFocusLetter = (e) => {
+    e.stopPropagation();
+    if (isOpen) {
+      playPop(); // Trigger pop sound
+      setIsFocused(true);
+    }
+};
 return (
   <div className="min-h-screen bg-red-50 flex items-center justify-center p-4">
     {/* 1. Backdrop Overlay (Global) */}
@@ -24,7 +41,7 @@ return (
     {/* 2. THE ENVELOPE WRAPPER (Now just the housing) */}
     <div 
       className="relative w-80 h-52 bg-pink-200 cursor-pointer shadow-2xl overflow-hidden"
-      onClick={() => { if (!isFocused) setIsOpen(!isOpen); }}
+      onClick={toggleEnvelope}
       style={{ perspective: "1000px" }}
     >
       {/* Front Pocket */}
@@ -76,10 +93,7 @@ return (
         // Ensure it is lower than the Front Pocket (z-20) when not focused
         zIndex: isOpen ? 25 : 5, 
       }}
-      onClick={(e) => {
-        e.stopPropagation();
-        if (isOpen) setIsFocused(true);
-      }}
+      onClick={handleFocusLetter}
       className={`
         bg-white shadow-2xl cursor-pointer overflow-hidden
         ${isFocused 
