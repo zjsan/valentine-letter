@@ -5,6 +5,11 @@ export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
+  // Add this helper to your App component
+const handleLetterClick = (e) => {
+  e.stopPropagation(); // Prevents the envelope from closing when clicking the letter
+  if (isOpen) setIsFocused(true);
+};
   return (
     <div className="min-h-screen bg-red-50 flex items-center justify-center">
       {/* 1. Envelope Wrapper (The Container) */}
