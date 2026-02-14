@@ -40,25 +40,33 @@ const handleLetterClick = (e) => {
         {/* 2. The Letter (Inside the pocket) */}
         <motion.div
           layoutId="letter"
-          transition={{ type: "spring", stiffness: 120, damping: 18 }}
           onClick={(e) => {
             e.stopPropagation();
             if (isOpen) setIsFocused(true);
           }}
+          // ADD THIS ANIMATE OBJECT
+          animate={isFocused ? {
+            y: 0,
+            scale: 1,
+            transition: { type: "spring", stiffness: 100, damping: 20 }
+          } : {
+            y: isOpen ? -110 : 0, // Moves it out of the pocket when open
+            scale: 1,
+          }}
+          transition={{ type: "spring", stiffness: 120, damping: 18 }}
           className={`
             bg-white shadow-2xl cursor-pointer overflow-hidden
             ${isFocused 
-              ? 'fixed inset-8 md:inset-20 rounded-2xl z-50 p-10' 
+              ? 'fixed inset-8 md:inset-20 rounded-2xl z-50 p-10 flex flex-col justify-start' 
               : 'absolute left-4 right-4 top-4 bottom-4 p-4 z-10 rounded-md'}
           `}
         >
-
       
         <div className="flex flex-col items-center justify-center h-full w-full text-center">
-          <h2 className={`${isFocused ? 'text-3xl' : 'text-xl'} font-serif text-pink-600 transition-all`}>
+          <h2 className={`font-serif text-pink-600 transition-all duration-300 ${isFocused ? 'text-4xl' : 'text-xl'}`}>
             Give me the chance na kase
           </h2>
-          <p className={`${isFocused ? 'text-lg' : 'text-xs'} text-gray-600 mt-4 leading-relaxed transition-all`}>
+          <p className={`text-gray-600 mt-6 leading-relaxed transition-all duration-300 ${isFocused ? 'text-lg' : 'text-xs'}`}>
             pleaseeeeeeeeeee, loloves naman kita mwaaaa
           </p>
           {isFocused && (
@@ -81,10 +89,11 @@ const handleLetterClick = (e) => {
 
         {/* 4. The Top Flap (The Hinge) */}
         <motion.div
-            animate={{
-            rotateX: isOpen ? 170 : 0,
-            zIndex: isOpen ? 0 : 30
-          }}
+           animate={{
+          rotateX: isOpen ? 170 : 0,
+          filter: isOpen ? "brightness(0.8)" : "brightness(1)",
+          zIndex: isOpen ? 0 : 30
+        }}
           transition={{ duration: 0.4 }}
           style={{
             transformOrigin: "top",
