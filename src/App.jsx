@@ -38,7 +38,7 @@ return (
         animate={{    
           rotateX: isOpen ? 170 : 0,
           filter: isOpen ? "brightness(0.8)" : "brightness(1)",
-          zIndex: isOpen ? 0 : 30
+          zIndex: 50 // always above letter when closed
         }}
         transition={{ duration: 0.4 }}
         style={{ transformOrigin: "top", clipPath: "polygon(0 0, 100% 0, 50% 50%)", backfaceVisibility: "hidden" }}
@@ -66,7 +66,8 @@ return (
         zIndex: 50,
       } : {
         // Increase the 'tuck' from 20 to 40 so it's fully hidden by the V-shape
-        y: isOpen ? -110 : 40, 
+        y: isOpen ?  -110 : 80,   // tuck under flap
+        opacity: isOpen ? 1 : 0,
         // Ensure it is lower than the Front Pocket (z-20) when not focused
         zIndex: isOpen ? 25 : 5, 
       }}
