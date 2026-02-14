@@ -6,25 +6,32 @@ export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
+  //soundeffects
   const [playOpen] = useSound('/sounds/Page turn sound effect.mp3', { volume: 0.5 });
   const [playPop] = useSound('/sounds/BUBBLE POP SOUND EFFECT - FREE.mp3', { volume: 0.4 });
+ 
+  //bg music
+  const [playBgm, { stop, sound }] = useSound('/sounds/My Valentine - Martina McBride (Piano Version by Riyandi Kusuma).mp3', { 
+  volume: 0.6, // Keep BGM soft
+  loop: true 
+});
 
   const toggleEnvelope = () => {
   if (!isFocused) {
-    playOpen(); // Trigger paper sound
-    
-     if (!isOpen) {
-      // Opening envelope
+    // 2. Play BGM on the very first click if it's not already playing
+    if (!isOpen) {
+      playBgm(); 
+      playOpen();
       setIsOpen(true);
-      setIsFocused(true); // Focus letter immediately
-      playPop(); // optional: trigger pop immediately
+      setIsFocused(true);
+      playPop();
     } else {
-      // Closing envelope
       setIsOpen(false);
       setIsFocused(false);
+      
     }
   }
-  };
+};
 
   const handleFocusLetter = (e) => {
     e.stopPropagation();
@@ -32,6 +39,7 @@ export default function App() {
       playPop(); // Trigger pop sound
       setIsFocused(true);
     }
+
 };
 return (
   <div className="min-h-screen bg-red-50 flex items-center justify-center p-4 ">
