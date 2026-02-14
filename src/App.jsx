@@ -12,7 +12,17 @@ export default function App() {
   const toggleEnvelope = () => {
   if (!isFocused) {
     playOpen(); // Trigger paper sound
-    setIsOpen(!isOpen);
+    
+     if (!isOpen) {
+      // Opening envelope
+      setIsOpen(true);
+      setIsFocused(true); // Focus letter immediately
+      playPop(); // optional: trigger pop immediately
+    } else {
+      // Closing envelope
+      setIsOpen(false);
+      setIsFocused(false);
+    }
   }
   };
 
@@ -136,11 +146,16 @@ return (
         {isFocused && (
            <div className="mt-auto">
               <button 
-                onClick={(e) => { e.stopPropagation(); setIsFocused(false); }}
-                className="bg-pink-400 text-white px-8 py-3 rounded-full shadow-lg hover:bg-pink-500 transition-transform active:scale-95"
-              >
-                Close Letter
-              </button>
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                setIsFocused(false); // unfocus letter
+                setIsOpen(false);     // close envelope
+              }}
+              className="bg-pink-400 text-white px-8 py-3 rounded-full shadow-lg hover:bg-pink-500 transition-transform active:scale-95"
+            >
+              Close Letter
+            </button>
+
            </div>
         )}
       </div>
