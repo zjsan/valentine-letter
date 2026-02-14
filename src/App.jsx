@@ -17,7 +17,7 @@ const handleLetterClick = (e) => {
       {isFocused && (
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
@@ -25,6 +25,7 @@ const handleLetterClick = (e) => {
         />
       )}
     </AnimatePresence>
+
 
       {/* 1. Envelope Wrapper (The Container) */}
      <div 
@@ -38,13 +39,21 @@ const handleLetterClick = (e) => {
         
         {/* 2. The Letter (Inside the pocket) */}
         <motion.div
-        layoutId="letter" // key for smooth morph
-        onClick={(e) => { e.stopPropagation(); if (isOpen) setIsFocused(true); }}
-        className={`
-          bg-white shadow-2xl cursor-pointer overflow-hidden
-          ${isFocused ? 'fixed inset-10 rounded-lg z-50 p-8' : 'absolute left-4 right-4 top-4 bottom-4 p-4 z-10'}
-        `}
-      >
+          layoutId="letter"
+          transition={{ type: "spring", stiffness: 120, damping: 18 }}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (isOpen) setIsFocused(true);
+          }}
+          className={`
+            bg-white shadow-2xl cursor-pointer overflow-hidden
+            ${isFocused 
+              ? 'fixed inset-8 md:inset-20 rounded-2xl z-50 p-10' 
+              : 'absolute left-4 right-4 top-4 bottom-4 p-4 z-10 rounded-md'}
+          `}
+        >
+
+      
         <div className="flex flex-col items-center justify-center h-full w-full text-center">
           <h2 className={`${isFocused ? 'text-3xl' : 'text-xl'} font-serif text-pink-600 transition-all`}>
             Give me the chance na kase
