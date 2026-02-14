@@ -34,7 +34,7 @@ export default function App() {
     }
 };
 return (
-  <div className="min-h-screen bg-red-50 flex items-center justify-center p-4">
+  <div className="min-h-screen bg-red-50 flex items-center justify-center p-4 ">
     {/* 1. Backdrop Overlay (Global) */}
     <AnimatePresence>
       {isFocused && (
@@ -50,7 +50,7 @@ return (
 
     {/* 2. THE ENVELOPE WRAPPER (Now just the housing) */}
     <div 
-      className="relative w-80 h-52 bg-pink-200 cursor-pointer shadow-2xl overflow-hidden"
+      className="relative w-80 h-52 bg-pink-200 cursor-pointer shadow-2xl overflow-hidden animate-bounce "
       onClick={toggleEnvelope}
       style={{ perspective: "1000px" }}
     >
@@ -73,7 +73,7 @@ return (
       />
 
       {!isOpen && (
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 text-red-500 text-2xl animate-pulse">❤️</div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 text-red-500 text-2xl">❤️</div>
       )}
 
       {/* --- MOVED THE LETTER BELOW TO UNTRAP IT --- */}
