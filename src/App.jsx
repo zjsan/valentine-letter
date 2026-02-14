@@ -22,8 +22,8 @@ export default function App() {
           className="absolute left-4 right-4 top-4 bottom-4 bg-white shadow-md p-4 z-10"
         >
           <div className="border-2 border-pink-100 h-full w-full flex flex-col items-center justify-center text-center">
-            <h2 className="font-serif text-xl text-pink-600">My Valentine</h2>
-            <p className="text-xs text-gray-500 mt-2">You make my heart 0xFFFFFF</p>
+            <h2 className="font-serif text-xl text-pink-600">Give me the chance na kase</h2>
+            <p className="text-xs text-gray-500 mt-2">pleaseeeeeeeeeee, loloves naman kita mwaaaa</p>
           </div>
         </motion.div>
 
@@ -35,14 +35,17 @@ export default function App() {
 
         {/* 4. The Top Flap (The Hinge) */}
         <motion.div
-          initial={{ rotateX: 0 }}
-          animate={{ rotateX: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.4 }}
-          style={{ 
-            transformOrigin: "top", 
-            clipPath: "polygon(0 0, 100% 0, 50% 50%)" 
+            animate={{
+            rotateX: isOpen ? 170 : 0,
+            zIndex: isOpen ? 0 : 30
           }}
-          className="absolute inset-0 bg-pink-400 z-30 shadow-sm"
+          transition={{ duration: 0.4 }}
+          style={{
+            transformOrigin: "top",
+            clipPath: "polygon(0 0, 100% 0, 50% 50%)",
+            backfaceVisibility: "hidden"
+          }}
+          className="absolute inset-0 bg-pink-400 shadow-sm"
         />
 
         {/* 5. A Little Heart Sticker (Optional Adorability) */}
