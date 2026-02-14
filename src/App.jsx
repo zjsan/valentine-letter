@@ -12,6 +12,18 @@ const handleLetterClick = (e) => {
 };
   return (
     <div className="min-h-screen bg-red-50 flex items-center justify-center">
+
+      <AnimatePresence>
+      {isFocused && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setIsFocused(false)}
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        />
+      )}
+    </AnimatePresence>
       {/* 1. Envelope Wrapper (The Container) */}
       <div 
         className="relative w-80 h-52 bg-pink-200 cursor-pointer shadow-2xl"
@@ -21,16 +33,31 @@ const handleLetterClick = (e) => {
         
         {/* 2. The Letter (Inside the pocket) */}
         <motion.div
-          initial={{ y: 0 }}
-          animate={{ y: isOpen ? -100 : 0 }}
-          transition={{ delay: isOpen ? 0.4 : 0, duration: 0.6, type: "spring" }}
-          className="absolute left-4 right-4 top-4 bottom-4 bg-white shadow-md p-4 z-10"
-        >
-          <div className="border-2 border-pink-100 h-full w-full flex flex-col items-center justify-center text-center">
-            <h2 className="font-serif text-xl text-pink-600">Give me the chance na kase</h2>
-            <p className="text-xs text-gray-500 mt-2">pleaseeeeeeeeeee, loloves naman kita mwaaaa</p>
-          </div>
-        </motion.div>
+  layoutId="letter" // key for smooth morph
+  onClick={(e) => { e.stopPropagation(); if (isOpen) setIsFocused(true); }}
+  className={`
+    bg-white shadow-2xl cursor-pointer overflow-hidden
+    ${isFocused ? 'fixed inset-10 rounded-lg z-50 p-8' : 'absolute left-4 right-4 top-4 bottom-4 p-4 z-10'}
+  `}
+>
+  <div className="flex flex-col items-center justify-center h-full w-full text-center">
+    <h2 className={`${isFocused ? 'text-3xl' : 'text-xl'} font-serif text-pink-600 transition-all`}>
+      Give me the chance na kase
+    </h2>
+    <p className={`${isFocused ? 'text-lg' : 'text-xs'} text-gray-600 mt-4 leading-relaxed transition-all`}>
+      pleaseeeeeeeeeee, loloves naman kita mwaaaa
+    </p>
+    {isFocused && (
+      <button 
+        onClick={() => setIsFocused(false)}
+        className="mt-8 text-pink-400 text-sm underline"
+      >
+        Close Letter
+      </button>
+    )}
+  </div>
+</motion.div>
+
 
         {/* 3. The Front Pocket (The 'V' shape covering the letter) */}
         <div 
