@@ -144,7 +144,7 @@ return (
         </p>
         
         {isFocused && (
-           <div className="mt-auto">
+           <div className="mt-10 pt-6 pb-8 border-t border-pink-100">
               <button 
               onClick={(e) => { 
                 e.stopPropagation(); 
