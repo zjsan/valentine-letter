@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   return (
     <div className="min-h-screen bg-red-50 flex items-center justify-center">
@@ -35,7 +36,7 @@ export default function App() {
         {/* 4. The Top Flap (The Hinge) */}
         <motion.div
           initial={{ rotateX: 0 }}
-          animate={{ rotateX: isOpen ? 170 : 0 }}
+          animate={{ rotateX: isOpen ? 180 : 0 }}
           transition={{ duration: 0.4 }}
           style={{ 
             transformOrigin: "top", 
